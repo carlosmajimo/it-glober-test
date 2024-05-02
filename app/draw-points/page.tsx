@@ -8,11 +8,6 @@ import Menu from '@/components/Menu';
 
 const MenuIcon = dynamic(() => import('@/components/MenuIcon'), { ssr: false });
 
-interface Point {
-  x: number;
-  y: number;
-}
-
 export default function DrawPoints() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -34,7 +29,7 @@ export default function DrawPoints() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = contextRef.current;
-    if (!canvas || !context || points.length === 0 || currentIndex === 0) return;
+    if (!canvas || !context) return;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < currentIndex; i++) {
@@ -50,7 +45,7 @@ export default function DrawPoints() {
     
     const x = clientX - 2.5;
     const y = clientY - 2.5;
-    context.fillRect(x, y, 5, 5);
+    // context.fillRect(x, y, 5, 5);
     setPoints(prev => {
       const newPoints = currentIndex < prev.length ? prev.slice(0, currentIndex) : prev
 
@@ -64,7 +59,7 @@ export default function DrawPoints() {
     const context = contextRef.current;
     if (!canvas || !context || currentIndex < 1) return;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    // context.clearRect(0, 0, canvas.width, canvas.height);
 
     setCurrentIndex(prev => prev - 1);
   };
@@ -82,7 +77,7 @@ export default function DrawPoints() {
     const context = contextRef.current;
     if (!canvas || !context ) return;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    // context.clearRect(0, 0, canvas.width, canvas.height);
     setPoints([]);
     setCurrentIndex(0);
   }
